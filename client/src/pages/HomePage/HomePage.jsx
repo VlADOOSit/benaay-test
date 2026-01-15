@@ -1,14 +1,10 @@
-import Container from '../../components/Container/Container.jsx';
-import Button from '../../components/Button/Button.jsx';
+import Header from '../../components/Header/Header.jsx';
 import './HomePage.css';
 
 function HomePage() {
   return (
     <main>
-      <Container>
-        <h1>Home</h1>
-        <Button>Button</Button>
-      </Container>
+      <Header />
     </main>
   );
 }
