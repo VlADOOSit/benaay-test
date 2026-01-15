@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import logoImage from '../../assets/image 41@2x.png';
+import searchIcon from '../../assets/search.png';
+import cartIcon from '../../assets/shopping-cart.png';
 import './Header.css';
 
 const NAV_LINKS = ['Link 1', 'Link 2', 'Link 3', 'Link 4', 'Link 5'];
@@ -73,20 +75,15 @@ function Header() {
         <div className="header__side header__side--right">
           <div className="header__actions">
             <div className="header__action" ref={searchRef}>
-              <button
-                type="button"
-                className="header__icon-button"
-                aria-label="Open search"
-                aria-expanded={isSearchOpen}
-                onClick={() => setIsSearchOpen((prev) => !prev)}
-              >
-                <svg viewBox="0 0 24 24" className="header__icon">
-                  <path
-                    d="M11 4a7 7 0 105.2 11.7l4.05 4.05 1.41-1.41-4.05-4.05A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
+            <button
+              type="button"
+              className="header__icon-button"
+              aria-label="Open search"
+              aria-expanded={isSearchOpen}
+              onClick={() => setIsSearchOpen((prev) => !prev)}
+            >
+              <img src={searchIcon} alt="" className="header__icon-image" />
+            </button>
 
               {isSearchOpen ? (
                 <div className="header__search-panel">
@@ -109,12 +106,7 @@ function Header() {
             </div>
 
             <button type="button" className="header__icon-button" aria-label="Cart">
-              <svg viewBox="0 0 24 24" className="header__icon">
-                <path
-                  d="M6 6h15l-1.5 8.5H8.2L6 6zm2.2 11a1.4 1.4 0 11-.01 2.8A1.4 1.4 0 018.2 17zm8 0a1.4 1.4 0 11-.01 2.8A1.4 1.4 0 0116.2 17z"
-                  fill="currentColor"
-                />
-              </svg>
+              <img src={cartIcon} alt="" className="header__icon-image" />
             </button>
 
             <div className="header__action header__language" ref={languageRef}>
