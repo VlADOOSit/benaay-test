@@ -1,0 +1,13 @@
+.btn {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
