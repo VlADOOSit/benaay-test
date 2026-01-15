@@ -19,6 +19,21 @@
   gap: var(--header-inner-gap);
 }
 
+.header__side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.header__side--left {
+  justify-content: flex-start;
+}
+
+.header__side--right {
+  justify-content: flex-end;
+}
+
 .header__logo {
   display: inline-flex;
   align-items: center;
@@ -47,6 +62,7 @@
   display: inline-flex;
   gap: var(--header-nav-gap);
   align-items: center;
+  flex: 0 0 auto;
 }
 
 .header__nav-link {

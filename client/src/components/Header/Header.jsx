@@ -53,11 +53,13 @@ function Header() {
   return (
     <header className="header">
       <div className="header__inner">
-        <div className="header__logo">
-          <div className="header__logo-mark" aria-hidden="true">
-            <img src={logoImage} alt="" className="header__logo-image" />
+        <div className="header__side header__side--left">
+          <div className="header__logo">
+            <div className="header__logo-mark" aria-hidden="true">
+              <img src={logoImage} alt="" className="header__logo-image" />
+            </div>
+            <span className="header__logo-text">Benaay</span>
           </div>
-          <span className="header__logo-text">Benaay</span>
         </div>
 
         <nav className="header__nav" aria-label="Primary">
@@ -68,86 +70,88 @@ function Header() {
           ))}
         </nav>
 
-        <div className="header__actions">
-          <div className="header__action" ref={searchRef}>
-            <button
-              type="button"
-              className="header__icon-button"
-              aria-label="Open search"
-              aria-expanded={isSearchOpen}
-              onClick={() => setIsSearchOpen((prev) => !prev)}
-            >
+        <div className="header__side header__side--right">
+          <div className="header__actions">
+            <div className="header__action" ref={searchRef}>
+              <button
+                type="button"
+                className="header__icon-button"
+                aria-label="Open search"
+                aria-expanded={isSearchOpen}
+                onClick={() => setIsSearchOpen((prev) => !prev)}
+              >
+                <svg viewBox="0 0 24 24" className="header__icon">
+                  <path
+                    d="M11 4a7 7 0 105.2 11.7l4.05 4.05 1.41-1.41-4.05-4.05A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </button>
+
+              {isSearchOpen ? (
+                <div className="header__search-panel">
+                  <div className="header__search-field">
+                    <svg viewBox="0 0 24 24" className="header__search-icon">
+                      <path
+                        d="M11 4a7 7 0 105.2 11.7l4.05 4.05 1.41-1.41-4.05-4.05A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      className="header__search-input"
+                      placeholder="Search..."
+                    />
+                  </div>
+                </div>
+              ) : null}
+            </div>
+
+            <button type="button" className="header__icon-button" aria-label="Cart">
               <svg viewBox="0 0 24 24" className="header__icon">
                 <path
-                  d="M11 4a7 7 0 105.2 11.7l4.05 4.05 1.41-1.41-4.05-4.05A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z"
+                  d="M6 6h15l-1.5 8.5H8.2L6 6zm2.2 11a1.4 1.4 0 11-.01 2.8A1.4 1.4 0 018.2 17zm8 0a1.4 1.4 0 11-.01 2.8A1.4 1.4 0 0116.2 17z"
                   fill="currentColor"
                 />
               </svg>
             </button>
 
-            {isSearchOpen ? (
-              <div className="header__search-panel">
-                <div className="header__search-field">
-                  <svg viewBox="0 0 24 24" className="header__search-icon">
-                    <path
-                      d="M11 4a7 7 0 105.2 11.7l4.05 4.05 1.41-1.41-4.05-4.05A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  <input
-                    ref={searchInputRef}
-                    type="text"
-                    className="header__search-input"
-                    placeholder="Search..."
+            <div className="header__action header__language" ref={languageRef}>
+              <button
+                type="button"
+                className="header__language-button"
+                aria-expanded={isLanguageOpen}
+                onClick={() => setIsLanguageOpen((prev) => !prev)}
+              >
+                <span className="header__language-text">Eng</span>
+                <svg viewBox="0 0 24 24" className="header__chevron" aria-hidden="true">
+                  <path
+                    d="M6 9l6 6 6-6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
+                </svg>
+              </button>
+
+              {isLanguageOpen ? (
+                <div className="header__language-menu" role="menu">
+                  {LANGUAGES.map((language) => (
+                    <button key={language} type="button" className="header__language-item">
+                      {language}
+                    </button>
+                  ))}
                 </div>
-              </div>
-            ) : null}
-          </div>
+              ) : null}
+            </div>
 
-          <button type="button" className="header__icon-button" aria-label="Cart">
-            <svg viewBox="0 0 24 24" className="header__icon">
-              <path
-                d="M6 6h15l-1.5 8.5H8.2L6 6zm2.2 11a1.4 1.4 0 11-.01 2.8A1.4 1.4 0 018.2 17zm8 0a1.4 1.4 0 11-.01 2.8A1.4 1.4 0 0116.2 17z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-
-          <div className="header__action header__language" ref={languageRef}>
-            <button
-              type="button"
-              className="header__language-button"
-              aria-expanded={isLanguageOpen}
-              onClick={() => setIsLanguageOpen((prev) => !prev)}
-            >
-              <span className="header__language-text">Eng</span>
-              <svg viewBox="0 0 24 24" className="header__chevron" aria-hidden="true">
-                <path
-                  d="M6 9l6 6 6-6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <button type="button" className="header__login">
+              Log In
             </button>
-
-            {isLanguageOpen ? (
-              <div className="header__language-menu" role="menu">
-                {LANGUAGES.map((language) => (
-                  <button key={language} type="button" className="header__language-item">
-                    {language}
-                  </button>
-                ))}
-              </div>
-            ) : null}
           </div>
-
-          <button type="button" className="header__login">
-            Log In
-          </button>
         </div>
       </div>
     </header>
