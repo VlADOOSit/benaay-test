@@ -18,7 +18,7 @@
   --color-primary-hover: #1a3b60;
   --header-text-color: #ffffff;
   --header-border-color: #153553;
-  --header-inner-gap: 32px;
+  --header-inner-gap: 0px;
   --header-side-width: 478.5px;
   --header-side-height: 48px;
   --header-logo-gap: 10px;
@@ -36,8 +36,6 @@
   --header-nav-gap: 24px;
   --header-nav-width: 323px;
   --header-nav-height: 24px;
-  --header-link-width: 46px;
-  --header-link-height: 24px;
   --header-link-size: 16px;
   --header-link-line-height: 150%;
   --header-link-letter-spacing: 0;
