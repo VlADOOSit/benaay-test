@@ -1,4 +1,5 @@
 import Header from '../../components/Header/Header.jsx';
+import CategoryCard from '../../components/CategoryCard/CategoryCard.jsx';
 import FeatureCard from '../../components/FeatureCard/FeatureCard.jsx';
 import LogosMarquee from '../../components/LogosMarquee/LogosMarquee.jsx';
 import deliveryIcon from '../../assets/feature-icons/icon-delivery.svg';
@@ -65,6 +66,37 @@ function HomePage() {
               icon={laptopIcon}
               title="Upload your list"
               description="Upload a photo or PDF of your materials list — we’ll find matching products for you"
+            />
+          </div>
+        </div>
+      </section>
+      <section className="categories">
+        <div className="categories__inner">
+          <div className="categories__heading">
+            <h2 className="categories__title">Main categories</h2>
+            <p className="categories__supporting">
+              Quickly find the materials you need. Choose a category and explore ready offers from
+              trusted suppliers
+            </p>
+          </div>
+          <div className="categories__row">
+            <CategoryCard
+              badgeText="1"
+              title="Plumbing connections"
+              description="Durable connectors for reliable water flow in any plumbing system"
+              theme="blue"
+            />
+            <CategoryCard
+              badgeText="2"
+              title="UPVC fittings"
+              description="Lightweight, corrosion-resistant fittings for modern piping solutions"
+              theme="green"
+            />
+            <CategoryCard
+              badgeText="3"
+              title="PPR fittings"
+              description="High-pressure, heat-resistant fittings built for long-term performance"
+              theme="purple"
             />
           </div>
         </div>
