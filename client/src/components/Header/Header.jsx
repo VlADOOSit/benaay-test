@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import logoImage from '../../assets/image 41@2x.png';
-import searchIcon from '../../assets/search.png';
-import cartIcon from '../../assets/shopping-cart.png';
+import searchIcon from '../../assets/search.svg';
+import cartIcon from '../../assets/shopping-cart.svg';
+import dropdownIcon from '../../assets/dropdown.svg';
+import searchInputIcon from '../../assets/search-gray.svg';
 import './Header.css';
 
 const NAV_LINKS = ['Link 1', 'Link 2', 'Link 3', 'Link 4', 'Link 5'];
@@ -11,6 +13,7 @@ const LANGUAGES = ['English', 'Arabic'];
 function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [activeLanguage, setActiveLanguage] = useState('English');
   const searchRef = useRef(null);
   const languageRef = useRef(null);
   const searchInputRef = useRef(null);
@@ -75,25 +78,20 @@ function Header() {
         <div className="header__side header__side--right">
           <div className="header__actions">
             <div className="header__action" ref={searchRef}>
-            <button
-              type="button"
-              className="header__icon-button"
-              aria-label="Open search"
-              aria-expanded={isSearchOpen}
-              onClick={() => setIsSearchOpen((prev) => !prev)}
-            >
-              <img src={searchIcon} alt="" className="header__icon-image" />
-            </button>
+              <button
+                type="button"
+                className="header__icon-button"
+                aria-label="Open search"
+                aria-expanded={isSearchOpen}
+                onClick={() => setIsSearchOpen((prev) => !prev)}
+              >
+                <img src={searchIcon} alt="" className="header__icon-image" />
+              </button>
 
               {isSearchOpen ? (
                 <div className="header__search-panel">
                   <div className="header__search-field">
-                    <svg viewBox="0 0 24 24" className="header__search-icon">
-                      <path
-                        d="M11 4a7 7 0 105.2 11.7l4.05 4.05 1.41-1.41-4.05-4.05A7 7 0 0011 4zm0 2a5 5 0 110 10 5 5 0 010-10z"
-                        fill="currentColor"
-                      />
-                    </svg>
+                    <img src={searchInputIcon} alt="" className="header__search-icon" />
                     <input
                       ref={searchInputRef}
                       type="text"
@@ -117,22 +115,23 @@ function Header() {
                 onClick={() => setIsLanguageOpen((prev) => !prev)}
               >
                 <span className="header__language-text">Eng</span>
-                <svg viewBox="0 0 24 24" className="header__chevron" aria-hidden="true">
-                  <path
-                    d="M6 9l6 6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <img src={dropdownIcon} alt="" className="header__chevron-image" />
               </button>
 
               {isLanguageOpen ? (
                 <div className="header__language-menu" role="menu">
                   {LANGUAGES.map((language) => (
-                    <button key={language} type="button" className="header__language-item">
+                    <button
+                      key={language}
+                      type="button"
+                      className={`header__language-item ${
+                        activeLanguage === language ? 'is-active' : ''
+                      }`.trim()}
+                      onClick={() => {
+                        setActiveLanguage(language);
+                        setIsLanguageOpen(false);
+                      }}
+                    >
                       {language}
                     </button>
                   ))}
