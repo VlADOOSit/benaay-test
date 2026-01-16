@@ -1,5 +1,9 @@
 import Header from '../../components/Header/Header.jsx';
+import FeatureCard from '../../components/FeatureCard/FeatureCard.jsx';
 import LogosMarquee from '../../components/LogosMarquee/LogosMarquee.jsx';
+import deliveryIcon from '../../assets/feature-icons/icon-delivery.svg';
+import priceIcon from '../../assets/feature-icons/icon-price.svg';
+import laptopIcon from '../../assets/feature-icons/icon-laptop.svg';
 import './HomePage.css';
 
 function HomePage() {
@@ -35,6 +39,34 @@ function HomePage() {
             </p>
           </div>
           <LogosMarquee />
+        </div>
+      </section>
+      <section className="advantages">
+        <div className="advantages__inner">
+          <div className="advantages__heading">
+            <h2 className="advantages__title">Our advantages</h2>
+            <p className="advantages__supporting">
+              We combine quality, speed and care so that you get the best result without
+              unnecessary effort.
+            </p>
+          </div>
+          <div className="advantages__row">
+            <FeatureCard
+              icon={deliveryIcon}
+              title="Fast delivery"
+              description="Receive your order quickly — guaranteed delivery across all regions of the Kingdom"
+            />
+            <FeatureCard
+              icon={priceIcon}
+              title="Compare prices"
+              description="Get instant quotes from trusted suppliers and choose the best offer for your needs"
+            />
+            <FeatureCard
+              icon={laptopIcon}
+              title="Upload your list"
+              description="Upload a photo or PDF of your materials list — we’ll find matching products for you"
+            />
+          </div>
         </div>
       </section>
     </main>
