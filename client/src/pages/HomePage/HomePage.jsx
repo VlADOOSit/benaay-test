@@ -1,4 +1,5 @@
 import Header from '../../components/Header/Header.jsx';
+import LogosMarquee from '../../components/LogosMarquee/LogosMarquee.jsx';
 import './HomePage.css';
 
 function HomePage() {
@@ -22,6 +23,18 @@ function HomePage() {
               Browse the catalog
             </button>
           </div>
+        </div>
+      </section>
+      <section className="suppliers">
+        <div className="suppliers__inner">
+          <div className="suppliers__heading">
+            <h2 className="suppliers__title">Our approved suppliers</h2>
+            <p className="suppliers__supporting">
+              We work only with verified suppliers to ensure quality, reliability, and fair pricing
+              for every order
+            </p>
+          </div>
+          <LogosMarquee />
         </div>
       </section>
     </main>
