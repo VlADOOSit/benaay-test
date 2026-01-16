@@ -1,6 +1,7 @@
 import Header from '../../components/Header/Header.jsx';
 import CategoryCard from '../../components/CategoryCard/CategoryCard.jsx';
 import FeatureCard from '../../components/FeatureCard/FeatureCard.jsx';
+import Footer from '../../components/Footer/Footer.jsx';
 import LogosMarquee from '../../components/LogosMarquee/LogosMarquee.jsx';
 import ReadyToGetStartedSection from '../../components/ReadyToGetStartedSection/ReadyToGetStartedSection.jsx';
 import deliveryIcon from '../../assets/feature-icons/icon-delivery.svg';
@@ -103,6 +104,7 @@ function HomePage() {
         </div>
       </section>
       <ReadyToGetStartedSection />
+      <Footer />
     </main>
   );
 }
