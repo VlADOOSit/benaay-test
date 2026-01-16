@@ -1,4 +1,4 @@
-import illustrationImage from '../../assets/get-started-image.svg';
+import illustrationImage from '../../assets/illustrations/get-started-image.svg';
 import './ReadyToGetStartedSection.css';
 
 function ReadyToGetStartedSection() {

@@ -1,4 +1,4 @@
-import arrowIcon from '../../assets/arrow.svg';
+import arrowIcon from '../../assets/icons/arrow.svg';
 import './CategoryCard.css';
 
 function CategoryCard({ badgeText, title, description, theme }) {

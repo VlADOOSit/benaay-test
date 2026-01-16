@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import logoImage from '../../assets/image 41@2x.png';
-import searchIcon from '../../assets/search.svg';
-import cartIcon from '../../assets/shopping-cart.svg';
-import dropdownIcon from '../../assets/dropdown.svg';
-import searchInputIcon from '../../assets/search-gray.svg';
+import logoImage from '../../assets/brand/logo-mark.png';
+import searchIcon from '../../assets/icons/search.svg';
+import cartIcon from '../../assets/icons/shopping-cart.svg';
+import dropdownIcon from '../../assets/icons/dropdown.svg';
+import searchInputIcon from '../../assets/icons/search-gray.svg';
 import './Header.css';
 
 const NAV_LINKS = ['Link 1', 'Link 2', 'Link 3', 'Link 4', 'Link 5'];

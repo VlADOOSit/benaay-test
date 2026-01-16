@@ -1,4 +1,4 @@
-import logoImage from '../../assets/image 41@2x.png';
+import logoImage from '../../assets/brand/logo-mark.png';
 import emailIcon from '../../assets/footer-icons/icon-email.svg';
 import locationIcon from '../../assets/footer-icons/icon-location.svg';
 import phoneIcon from '../../assets/footer-icons/icon-phone.svg';
