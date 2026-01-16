@@ -79,3 +79,43 @@
 .hero__button--secondary {
   border-color: #ffffff;
 }
+
+.suppliers {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 80px;
+  box-sizing: border-box;
+}
+
+.suppliers__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.suppliers__heading {
+  width: 612px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.suppliers__title {
+  margin: 0;
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #181d27;
+}
+
+.suppliers__supporting {
+  margin: 0;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  color: #535862;
+}
