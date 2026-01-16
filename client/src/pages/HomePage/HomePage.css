@@ -118,3 +118,49 @@
   font-weight: 400;
   color: #535862;
 }
+
+.advantages {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 80px;
+  box-sizing: border-box;
+}
+
+.advantages__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.advantages__heading {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.advantages__title {
+  margin: 0;
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #181d27;
+}
+
+.advantages__supporting {
+  margin: 0;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  color: #535862;
+}
+
+.advantages__row {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+}
