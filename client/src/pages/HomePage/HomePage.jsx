@@ -1,18 +1,22 @@
+import { useState } from 'react';
 import Header from '../../components/Header/Header.jsx';
 import CategoryCard from '../../components/CategoryCard/CategoryCard.jsx';
 import FeatureCard from '../../components/FeatureCard/FeatureCard.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import LogosMarquee from '../../components/LogosMarquee/LogosMarquee.jsx';
 import ReadyToGetStartedSection from '../../components/ReadyToGetStartedSection/ReadyToGetStartedSection.jsx';
+import LoginModal from '../../components/LoginModal/LoginModal.jsx';
 import deliveryIcon from '../../assets/feature-icons/icon-delivery.svg';
 import priceIcon from '../../assets/feature-icons/icon-price.svg';
 import laptopIcon from '../../assets/feature-icons/icon-laptop.svg';
 import './HomePage.css';
 
 function HomePage() {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   return (
-    <main>
-      <Header />
+    <main className="login-page">
+      <Header onLoginClick={() => setIsLoginOpen(true)} />
       <section className="hero">
         <div className="hero__content">
           <div className="hero__text-group">
@@ -105,6 +109,7 @@ function HomePage() {
       </section>
       <ReadyToGetStartedSection />
       <Footer />
+      {isLoginOpen ? <LoginModal onClose={() => setIsLoginOpen(false)} /> : null}
     </main>
   );
 }
