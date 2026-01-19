@@ -55,8 +55,14 @@ apiClient.interceptors.response.use(
   async (error) => {
     const response = error?.response;
     const originalRequest = error?.config;
+    const requestUrl = originalRequest?.url || '';
+    const shouldSkipRefresh =
+      originalRequest?.skipAuthRefresh ||
+      requestUrl.includes('/auth/login') ||
+      requestUrl.includes('/auth/register') ||
+      requestUrl.includes('/auth/refresh');
 
-    if (!response || response.status !== 401 || originalRequest?._retry) {
+    if (!response || response.status !== 401 || originalRequest?._retry || shouldSkipRefresh) {
       throw error;
     }
 
