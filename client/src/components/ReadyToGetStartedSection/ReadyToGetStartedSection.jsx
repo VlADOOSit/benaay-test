@@ -1,7 +1,7 @@
 import illustrationImage from '../../assets/illustrations/get-started-image.svg';
 import './ReadyToGetStartedSection.css';
 
-function ReadyToGetStartedSection() {
+function ReadyToGetStartedSection({ onRegisterClick }) {
   return (
     <section className="ready-cta">
       <div className="ready-cta__card">
@@ -12,9 +12,9 @@ function ReadyToGetStartedSection() {
               Join hundreds of contractors and plumbers who use Bannai to save time and money
             </p>
           </div>
-          <a className="ready-cta__button" href="#">
+          <button type="button" className="ready-cta__button" onClick={onRegisterClick}>
             Register now for free
-          </a>
+          </button>
         </div>
         <div className="ready-cta__illustration">
           <img src={illustrationImage} alt="" aria-hidden="true" />

@@ -6,17 +6,18 @@ import Footer from '../../components/Footer/Footer.jsx';
 import LogosMarquee from '../../components/LogosMarquee/LogosMarquee.jsx';
 import ReadyToGetStartedSection from '../../components/ReadyToGetStartedSection/ReadyToGetStartedSection.jsx';
 import LoginModal from '../../components/LoginModal/LoginModal.jsx';
+import RegistrationModal from '../../components/RegistrationModal/RegistrationModal.jsx';
 import deliveryIcon from '../../assets/feature-icons/icon-delivery.svg';
 import priceIcon from '../../assets/feature-icons/icon-price.svg';
 import laptopIcon from '../../assets/feature-icons/icon-laptop.svg';
 import './HomePage.css';
 
 function HomePage() {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
   return (
     <main className="login-page">
-      <Header onLoginClick={() => setIsLoginOpen(true)} />
+      <Header onLoginClick={() => setActiveModal('login')} />
       <section className="hero">
         <div className="hero__content">
           <div className="hero__text-group">
@@ -27,10 +28,18 @@ function HomePage() {
             </p>
           </div>
           <div className="hero__cta">
-            <button type="button" className="hero__button hero__button--primary">
+            <button
+              type="button"
+              className="hero__button hero__button--primary"
+              onClick={() => setActiveModal('register')}
+            >
               Start now
             </button>
-            <button type="button" className="hero__button hero__button--secondary">
+            <button
+              type="button"
+              className="hero__button hero__button--secondary"
+              onClick={() => setActiveModal('register')}
+            >
               Browse the catalog
             </button>
           </div>
@@ -107,9 +116,20 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <ReadyToGetStartedSection />
+      <ReadyToGetStartedSection onRegisterClick={() => setActiveModal('register')} />
       <Footer />
-      {isLoginOpen ? <LoginModal onClose={() => setIsLoginOpen(false)} /> : null}
+      {activeModal === 'login' ? (
+        <LoginModal
+          onClose={() => setActiveModal(null)}
+          onSwitchToRegister={() => setActiveModal('register')}
+        />
+      ) : null}
+      {activeModal === 'register' ? (
+        <RegistrationModal
+          onClose={() => setActiveModal(null)}
+          onSwitchToLogin={() => setActiveModal('login')}
+        />
+      ) : null}
     </main>
   );
 }

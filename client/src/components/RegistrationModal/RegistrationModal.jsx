@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import cancelIcon from '../../assets/icons/cancel.svg';
 import eyeIcon from '../../assets/icons/eye.svg';
-import './LoginModal.css';
+import '../LoginModal/LoginModal.css';
 
-function LoginModal({ onClose, onSwitchToRegister }) {
+function RegistrationModal({ onClose, onSwitchToLogin }) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -18,7 +18,7 @@ function LoginModal({ onClose, onSwitchToRegister }) {
     event.preventDefault();
     setIsClosing(true);
     setTimeout(() => {
-      onSwitchToRegister?.();
+      onSwitchToLogin?.();
     }, 180);
   };
 
@@ -28,14 +28,14 @@ function LoginModal({ onClose, onSwitchToRegister }) {
         className={`login-modal ${isClosing ? 'is-closing' : ''}`}
         role="dialog"
         aria-modal="true"
-        aria-label="Login"
+        aria-label="Registration"
       >
         <button type="button" className="login-modal__close" onClick={handleClose} aria-label="Close">
           <img src={cancelIcon} alt="" className="login-modal__close-icon" />
         </button>
         <div className="login-modal__content">
           <div className="login-modal__header">
-            <h2 className="login-modal__title">Enter the office</h2>
+            <h2 className="login-modal__title">Registration</h2>
             <p className="login-modal__subtitle">
               Lorem ipsum dolor sit amet consectetur. Sit nisl vulputate euismod et id.
             </p>
@@ -43,16 +43,23 @@ function LoginModal({ onClose, onSwitchToRegister }) {
           <div className="login-modal__form">
             <input
               className="login-modal__input"
+              type="text"
+              id="register-full-name"
+              name="fullName"
+              placeholder="Full Name"
+            />
+            <input
+              className="login-modal__input"
               type="email"
-              id="login-email"
+              id="register-email"
               name="email"
-              placeholder="Login or e-mail"
+              placeholder="E-mail"
             />
             <div className="login-modal__input-wrap">
               <input
                 className="login-modal__input"
                 type={isPasswordVisible ? 'text' : 'password'}
-                id="login-password"
+                id="register-password"
                 name="password"
                 placeholder="Enter your password"
               />
@@ -65,17 +72,14 @@ function LoginModal({ onClose, onSwitchToRegister }) {
                 <img src={eyeIcon} alt="" className="login-modal__icon-image" />
               </button>
             </div>
-            <a className="login-modal__forgot" href="#">
-              Forgot your password?
-            </a>
           </div>
           <a className="login-modal__button" href="#">
-            Sign in
+            Sign Up
           </a>
           <p className="login-modal__register">
-            Don&apos;t have an account yet?{' '}
+            Already registered?{' '}
             <a className="login-modal__register-link" href="#" onClick={handleSwitch}>
-              Register
+              Login
             </a>
           </p>
         </div>
@@ -84,4 +88,4 @@ function LoginModal({ onClose, onSwitchToRegister }) {
   );
 }
 
-export default LoginModal;
+export default RegistrationModal;
