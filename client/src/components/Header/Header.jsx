@@ -10,7 +10,7 @@ const NAV_LINKS = ['Link 1', 'Link 2', 'Link 3', 'Link 4', 'Link 5'];
 
 const LANGUAGES = ['English', 'Arabic'];
 
-function Header() {
+function Header({ onLoginClick }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [activeLanguage, setActiveLanguage] = useState('English');
@@ -139,7 +139,7 @@ function Header() {
               ) : null}
             </div>
 
-            <button type="button" className="header__login">
+            <button type="button" className="header__login" onClick={onLoginClick}>
               Log In
             </button>
           </div>
