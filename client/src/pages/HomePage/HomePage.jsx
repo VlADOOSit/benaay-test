@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header.jsx';
 import CategoryCard from '../../components/CategoryCard/CategoryCard.jsx';
 import FeatureCard from '../../components/FeatureCard/FeatureCard.jsx';
@@ -7,6 +7,9 @@ import LogosMarquee from '../../components/LogosMarquee/LogosMarquee.jsx';
 import ReadyToGetStartedSection from '../../components/ReadyToGetStartedSection/ReadyToGetStartedSection.jsx';
 import LoginModal from '../../components/LoginModal/LoginModal.jsx';
 import RegistrationModal from '../../components/RegistrationModal/RegistrationModal.jsx';
+import LogoutConfirmModal from '../../components/LogoutConfirmModal/LogoutConfirmModal.jsx';
+import { getMe, login, logout, register } from '../../api/authApi.js';
+import { refreshAccessToken } from '../../api/httpClient.js';
 import deliveryIcon from '../../assets/feature-icons/icon-delivery.svg';
 import priceIcon from '../../assets/feature-icons/icon-price.svg';
 import laptopIcon from '../../assets/feature-icons/icon-laptop.svg';
@@ -14,10 +17,64 @@ import './HomePage.css';
 
 function HomePage() {
   const [activeModal, setActiveModal] = useState(null);
+  const [user, setUser] = useState(null);
+  const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const bootstrapAuth = async () => {
+      try {
+        await refreshAccessToken();
+        const data = await getMe();
+        if (isMounted) {
+          setUser(data.user);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setUser(null);
+        }
+      }
+    };
+
+    bootstrapAuth();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleLogin = async ({ email, password }) => {
+    const data = await login({ email, password });
+    setUser(data.user);
+  };
+
+  const handleRegister = async ({ fullName, email, password }) => {
+    const data = await register({ fullName, email, password });
+    setUser(data.user);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setUser(null);
+    setActiveModal(null);
+  };
+
+  const handleLogoutConfirm = async () => {
+    try {
+      await handleLogout();
+    } finally {
+      setIsLogoutConfirmOpen(false);
+    }
+  };
 
   return (
     <main className="login-page">
-      <Header onLoginClick={() => setActiveModal('login')} />
+      <Header
+        isAuthenticated={Boolean(user)}
+        onLoginClick={() => setActiveModal('login')}
+        onLogoutClick={() => setIsLogoutConfirmOpen(true)}
+      />
       <section className="hero">
         <div className="hero__content">
           <div className="hero__text-group">
@@ -28,13 +85,17 @@ function HomePage() {
             </p>
           </div>
           <div className="hero__cta">
-            <button
-              type="button"
-              className="hero__button hero__button--primary"
-              onClick={() => setActiveModal('register')}
-            >
-              Start now
-            </button>
+            {user ? (
+              <div className="hero__welcome">Hello, {user.fullName}!</div>
+            ) : (
+              <button
+                type="button"
+                className="hero__button hero__button--primary"
+                onClick={() => setActiveModal('register')}
+              >
+                Start now
+              </button>
+            )}
             <button
               type="button"
               className="hero__button hero__button--secondary"
@@ -116,18 +177,28 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <ReadyToGetStartedSection onRegisterClick={() => setActiveModal('register')} />
+      {user ? null : (
+        <ReadyToGetStartedSection onRegisterClick={() => setActiveModal('register')} />
+      )}
       <Footer />
       {activeModal === 'login' ? (
         <LoginModal
           onClose={() => setActiveModal(null)}
           onSwitchToRegister={() => setActiveModal('register')}
+          onSubmit={handleLogin}
         />
       ) : null}
       {activeModal === 'register' ? (
         <RegistrationModal
           onClose={() => setActiveModal(null)}
           onSwitchToLogin={() => setActiveModal('login')}
+          onSubmit={handleRegister}
+        />
+      ) : null}
+      {isLogoutConfirmOpen ? (
+        <LogoutConfirmModal
+          onCancel={() => setIsLogoutConfirmOpen(false)}
+          onConfirm={handleLogoutConfirm}
         />
       ) : null}
     </main>

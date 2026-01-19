@@ -3,9 +3,13 @@ import cancelIcon from '../../assets/icons/cancel.svg';
 import eyeIcon from '../../assets/icons/eye.svg';
 import './LoginModal.css';
 
-function LoginModal({ onClose, onSwitchToRegister }) {
+function LoginModal({ onClose, onSwitchToRegister, onSubmit }) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClose = () => {
     setIsClosing(true);
@@ -20,6 +24,21 @@ function LoginModal({ onClose, onSwitchToRegister }) {
     setTimeout(() => {
       onSwitchToRegister?.();
     }, 180);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError('');
+    setIsSubmitting(true);
+
+    try {
+      await onSubmit?.({ email, password });
+      handleClose();
+    } catch (err) {
+      setError(err?.message || 'Login failed. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -40,13 +59,17 @@ function LoginModal({ onClose, onSwitchToRegister }) {
               Lorem ipsum dolor sit amet consectetur. Sit nisl vulputate euismod et id.
             </p>
           </div>
-          <div className="login-modal__form">
+          <form className="login-modal__form" onSubmit={handleSubmit}>
             <input
               className="login-modal__input"
               type="email"
               id="login-email"
               name="email"
               placeholder="Login or e-mail"
+              autoComplete="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
             />
             <div className="login-modal__input-wrap">
               <input
@@ -55,6 +78,10 @@ function LoginModal({ onClose, onSwitchToRegister }) {
                 id="login-password"
                 name="password"
                 placeholder="Enter your password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
               />
               <button
                 type="button"
@@ -68,10 +95,11 @@ function LoginModal({ onClose, onSwitchToRegister }) {
             <a className="login-modal__forgot" href="#">
               Forgot your password?
             </a>
-          </div>
-          <a className="login-modal__button" href="#">
-            Sign in
-          </a>
+            {error ? <p className="login-modal__error">{error}</p> : null}
+            <button type="submit" className="login-modal__button" disabled={isSubmitting}>
+              {isSubmitting ? 'Signing in...' : 'Sign in'}
+            </button>
+          </form>
           <p className="login-modal__register">
             Don&apos;t have an account yet?{' '}
             <a className="login-modal__register-link" href="#" onClick={handleSwitch}>

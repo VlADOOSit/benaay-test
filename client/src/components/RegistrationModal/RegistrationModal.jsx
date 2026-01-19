@@ -3,9 +3,14 @@ import cancelIcon from '../../assets/icons/cancel.svg';
 import eyeIcon from '../../assets/icons/eye.svg';
 import '../LoginModal/LoginModal.css';
 
-function RegistrationModal({ onClose, onSwitchToLogin }) {
+function RegistrationModal({ onClose, onSwitchToLogin, onSubmit }) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClose = () => {
     setIsClosing(true);
@@ -20,6 +25,21 @@ function RegistrationModal({ onClose, onSwitchToLogin }) {
     setTimeout(() => {
       onSwitchToLogin?.();
     }, 180);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError('');
+    setIsSubmitting(true);
+
+    try {
+      await onSubmit?.({ fullName, email, password });
+      handleClose();
+    } catch (err) {
+      setError(err?.message || 'Registration failed. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -40,13 +60,17 @@ function RegistrationModal({ onClose, onSwitchToLogin }) {
               Lorem ipsum dolor sit amet consectetur. Sit nisl vulputate euismod et id.
             </p>
           </div>
-          <div className="login-modal__form">
+          <form className="login-modal__form" onSubmit={handleSubmit}>
             <input
               className="login-modal__input"
               type="text"
               id="register-full-name"
               name="fullName"
               placeholder="Full Name"
+              autoComplete="name"
+              value={fullName}
+              onChange={(event) => setFullName(event.target.value)}
+              required
             />
             <input
               className="login-modal__input"
@@ -54,6 +78,10 @@ function RegistrationModal({ onClose, onSwitchToLogin }) {
               id="register-email"
               name="email"
               placeholder="E-mail"
+              autoComplete="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
             />
             <div className="login-modal__input-wrap">
               <input
@@ -62,6 +90,10 @@ function RegistrationModal({ onClose, onSwitchToLogin }) {
                 id="register-password"
                 name="password"
                 placeholder="Enter your password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
               />
               <button
                 type="button"
@@ -72,10 +104,11 @@ function RegistrationModal({ onClose, onSwitchToLogin }) {
                 <img src={eyeIcon} alt="" className="login-modal__icon-image" />
               </button>
             </div>
-          </div>
-          <a className="login-modal__button" href="#">
-            Sign Up
-          </a>
+            {error ? <p className="login-modal__error">{error}</p> : null}
+            <button type="submit" className="login-modal__button" disabled={isSubmitting}>
+              {isSubmitting ? 'Signing up...' : 'Sign Up'}
+            </button>
+          </form>
           <p className="login-modal__register">
             Already registered?{' '}
             <a className="login-modal__register-link" href="#" onClick={handleSwitch}>
