@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 let accessToken = null;
@@ -13,46 +15,18 @@ export const clearAccessToken = () => {
 
 export const getAccessToken = () => accessToken;
 
-const buildUrl = (path) => `${API_BASE_URL}/api${path}`;
+export const apiClient = axios.create({
+  baseURL: `${API_BASE_URL}/api`,
+  withCredentials: true
+});
 
-const parseResponse = async (response) => {
-  const text = await response.text();
-  if (!text) {
-    return null;
-  }
-
-  try {
-    return JSON.parse(text);
-  } catch (err) {
-    return text;
-  }
-};
-
-const requestRaw = async (path, options = {}) => {
-  const response = await fetch(buildUrl(path), {
-    credentials: 'include',
-    ...options
-  });
-
-  const data = await parseResponse(response);
-  return { response, data };
-};
-
-export const request = async (path, options = {}) => {
-  const { response, data } = await requestRaw(path, options);
-  if (!response.ok) {
-    const message = data?.message || 'Request failed';
-    const error = new Error(message);
-    error.status = response.status;
-    error.data = data;
-    throw error;
-  }
-
-  return data;
-};
+const refreshClient = axios.create({
+  baseURL: `${API_BASE_URL}/api`,
+  withCredentials: true
+});
 
 const refreshAccessTokenInternal = async () => {
-  const data = await request('/auth/refresh', { method: 'POST' });
+  const { data } = await refreshClient.post('/auth/refresh');
   if (data?.accessToken) {
     setAccessToken(data.accessToken);
   }
@@ -69,52 +43,33 @@ export const refreshAccessToken = async () => {
   return refreshPromise;
 };
 
-export const requestWithAuth = async (path, options = {}) => {
-  const headers = new Headers(options.headers || {});
+apiClient.interceptors.request.use((config) => {
   if (accessToken) {
-    headers.set('Authorization', `Bearer ${accessToken}`);
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
+  return config;
+});
 
-  const { response, data } = await requestRaw(path, {
-    ...options,
-    headers
-  });
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const response = error?.response;
+    const originalRequest = error?.config;
 
-  if (response.status === 401) {
+    if (!response || response.status !== 401 || originalRequest?._retry) {
+      throw error;
+    }
+
     try {
+      originalRequest._retry = true;
       await refreshAccessToken();
-      const retryHeaders = new Headers(options.headers || {});
       if (accessToken) {
-        retryHeaders.set('Authorization', `Bearer ${accessToken}`);
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
       }
-
-      const retryResult = await requestRaw(path, {
-        ...options,
-        headers: retryHeaders
-      });
-
-      if (!retryResult.response.ok) {
-        const message = retryResult.data?.message || 'Request failed';
-        const error = new Error(message);
-        error.status = retryResult.response.status;
-        error.data = retryResult.data;
-        throw error;
-      }
-
-      return retryResult.data;
+      return apiClient(originalRequest);
     } catch (err) {
       clearAccessToken();
       throw err;
     }
   }
-
-  if (!response.ok) {
-    const message = data?.message || 'Request failed';
-    const error = new Error(message);
-    error.status = response.status;
-    error.data = data;
-    throw error;
-  }
-
-  return data;
-};
+);

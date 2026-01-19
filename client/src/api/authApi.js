@@ -1,11 +1,7 @@
-import { clearAccessToken, request, requestWithAuth, setAccessToken } from './httpClient.js';
+import { apiClient, clearAccessToken, setAccessToken } from './httpClient.js';
 
 export const login = async ({ email, password }) => {
-  const data = await request('/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  });
+  const { data } = await apiClient.post('/auth/login', { email, password });
 
   if (data?.accessToken) {
     setAccessToken(data.accessToken);
@@ -15,11 +11,7 @@ export const login = async ({ email, password }) => {
 };
 
 export const register = async ({ fullName, email, password }) => {
-  const data = await request('/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ fullName, email, password })
-  });
+  const { data } = await apiClient.post('/auth/register', { fullName, email, password });
 
   if (data?.accessToken) {
     setAccessToken(data.accessToken);
@@ -29,10 +21,11 @@ export const register = async ({ fullName, email, password }) => {
 };
 
 export const logout = async () => {
-  await request('/auth/logout', { method: 'POST' });
+  await apiClient.post('/auth/logout');
   clearAccessToken();
 };
 
 export const getMe = async () => {
-  return requestWithAuth('/auth/me');
+  const { data } = await apiClient.get('/auth/me');
+  return data;
 };
