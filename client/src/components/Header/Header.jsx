@@ -10,7 +10,7 @@ const NAV_LINKS = ['Link 1', 'Link 2', 'Link 3', 'Link 4', 'Link 5'];
 
 const LANGUAGES = ['English', 'Arabic'];
 
-function Header({ onLoginClick }) {
+function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [activeLanguage, setActiveLanguage] = useState('English');
@@ -139,8 +139,12 @@ function Header({ onLoginClick }) {
               ) : null}
             </div>
 
-            <button type="button" className="header__login" onClick={onLoginClick}>
-              Log In
+            <button
+              type="button"
+              className="header__login"
+              onClick={isAuthenticated ? onLogoutClick : onLoginClick}
+            >
+              {isAuthenticated ? 'Log Out' : 'Log In'}
             </button>
           </div>
         </div>

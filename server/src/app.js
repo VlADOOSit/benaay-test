@@ -10,11 +10,21 @@ export const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
+const corsOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(
-	cors({
-		origin: process.env.CORS_ORIGIN || '*',
-		credentials: true
-	})
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || corsOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true
+  })
 );
 
 app.get('/health', (req, res) => {
