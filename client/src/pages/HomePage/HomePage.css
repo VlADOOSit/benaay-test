@@ -161,7 +161,6 @@
 }
 
 .advantages__heading {
-  width: 900px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -207,7 +206,6 @@
 }
 
 .categories__heading {
-  width: 974px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -228,7 +226,6 @@
   line-height: 30px;
   font-weight: 400;
   color: #535862;
-  white-space: nowrap;
 }
 
 .categories__row {
