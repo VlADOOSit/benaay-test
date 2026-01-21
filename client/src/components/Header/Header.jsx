@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import logoImage from '../../assets/brand/logo-mark.png';
 import searchIcon from '../../assets/icons/search.svg';
 import cartIcon from '../../assets/icons/shopping-cart.svg';
@@ -7,20 +8,30 @@ import searchInputIcon from '../../assets/icons/search-gray.svg';
 import './Header.css';
 import HeaderTabletMenu from './HeaderTabletMenu';
 
-const NAV_LINKS = ['Link 1', 'Link 2', 'Link 3', 'Link 4', 'Link 5'];
+const NAV_LINK_KEYS = [
+  'common.nav.link1',
+  'common.nav.link2',
+  'common.nav.link3',
+  'common.nav.link4',
+  'common.nav.link5',
+];
 
-const LANGUAGES = ['English', 'Arabic'];
+const LANGUAGES = [
+  { code: 'en', labelKey: 'common.language.english' },
+  { code: 'ar', labelKey: 'common.language.arabic' },
+];
 
 function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
+  const { t, i18n } = useTranslation();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
-  const [activeLanguage, setActiveLanguage] = useState('English');
   const searchRef = useRef(null);
   const languageRef = useRef(null);
   const tabletLanguageRef = useRef(null);
   const menuRef = useRef(null);
   const searchInputRef = useRef(null);
+  const activeLanguage = i18n.language === 'ar' ? 'ar' : 'en';
 
   useEffect(() => {
     if (!isSearchOpen) {
@@ -82,6 +93,13 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
     };
   }, [isTabletMenuOpen]);
 
+  const handleLanguageChange = (language) => {
+    i18n.changeLanguage(language);
+    setIsLanguageOpen(false);
+    setIsTabletMenuOpen(false);
+    setIsSearchOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="header__inner">
@@ -90,14 +108,14 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
             <div className="header__logo-mark" aria-hidden="true">
               <img src={logoImage} alt="" className="header__logo-image" />
             </div>
-            <span className="header__logo-text">Benaay</span>
+            <span className="header__logo-text">{t('common.brand.name')}</span>
           </div>
         </div>
 
-        <nav className="header__nav" aria-label="Primary">
-          {NAV_LINKS.map((label) => (
-            <a key={label} href="#" className="header__nav-link">
-              {label}
+        <nav className="header__nav" aria-label={t('common.header.primaryNav')}>
+          {NAV_LINK_KEYS.map((key) => (
+            <a key={key} href="#" className="header__nav-link">
+              {t(key)}
             </a>
           ))}
         </nav>
@@ -108,7 +126,7 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
               <button
                 type="button"
                 className="header__icon-button"
-                aria-label="Open search"
+                aria-label={t('common.header.openSearch')}
                 aria-expanded={isSearchOpen}
                 onClick={() =>
                   setIsSearchOpen((prev) => {
@@ -132,14 +150,14 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
                       ref={searchInputRef}
                       type="text"
                       className="header__search-input"
-                      placeholder="Search..."
+                      placeholder={t('common.header.searchPlaceholder')}
                     />
                   </div>
                 </div>
               ) : null}
             </div>
 
-            <button type="button" className="header__icon-button" aria-label="Cart">
+            <button type="button" className="header__icon-button" aria-label={t('common.header.cart')}>
               <img src={cartIcon} alt="" className="header__icon-image" />
             </button>
 
@@ -159,7 +177,7 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
                   })
                 }
               >
-                <span className="header__language-text">Eng</span>
+                <span className="header__language-text">{t('common.language.short')}</span>
                 <img src={dropdownIcon} alt="" className="header__chevron-image" />
               </button>
 
@@ -167,17 +185,16 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
                 <div className="header__language-menu" role="menu">
                   {LANGUAGES.map((language) => (
                     <button
-                      key={language}
+                      key={language.code}
                       type="button"
                       className={`header__language-item ${
-                        activeLanguage === language ? 'is-active' : ''
+                        activeLanguage === language.code ? 'is-active' : ''
                       }`.trim()}
                       onClick={() => {
-                        setActiveLanguage(language);
-                        setIsLanguageOpen(false);
+                        handleLanguageChange(language.code);
                       }}
                     >
-                      {language}
+                      {t(language.labelKey)}
                     </button>
                   ))}
                 </div>
@@ -188,14 +205,14 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
               isOpen={isTabletMenuOpen}
               menuRef={menuRef}
               tabletLanguageRef={tabletLanguageRef}
-              navLinks={NAV_LINKS}
+              navLinks={NAV_LINK_KEYS}
               languages={LANGUAGES}
               activeLanguage={activeLanguage}
-              setActiveLanguage={setActiveLanguage}
               isLanguageOpen={isLanguageOpen}
               setIsLanguageOpen={setIsLanguageOpen}
               setIsSearchOpen={setIsSearchOpen}
               setIsTabletMenuOpen={setIsTabletMenuOpen}
+              onLanguageChange={handleLanguageChange}
               isAuthenticated={isAuthenticated}
               onLoginClick={onLoginClick}
               onLogoutClick={onLogoutClick}
@@ -206,7 +223,7 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
               className="header__login"
               onClick={isAuthenticated ? onLogoutClick : onLoginClick}
             >
-              {isAuthenticated ? 'Log Out' : 'Log In'}
+              {isAuthenticated ? t('common.auth.logout') : t('common.auth.login')}
             </button>
           </div>
         </div>

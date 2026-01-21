@@ -16,6 +16,7 @@
 
 .hero__content {
   padding: 12px 0;
+  padding-right: 32px;
   width: 100%;
   max-width: 1280px;
   display: flex;
@@ -307,12 +308,16 @@
     background: none;
   }
 
+  [dir='rtl'] .hero {
+    padding: 315px 16px 32px;
+  }
+
   .hero::before {
     content: '';
     position: absolute;
     width: 1382px;
     height: 716px;
-    left: -541px;
+    inset-inline-end: -541px;
     top: -55px;
     background: url('../../assets/backgrounds/container-background.jpg') lightgray 50% / cover
       no-repeat;

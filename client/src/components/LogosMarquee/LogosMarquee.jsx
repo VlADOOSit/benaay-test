@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import './LogosMarquee.css';
 
 const LOGOS = [
@@ -12,6 +13,7 @@ const LOGOS = [
 ];
 
 function LogosMarquee() {
+  const { t, i18n } = useTranslation();
   const marqueeRef = useRef(null);
   const stripRef = useRef(null);
 
@@ -36,21 +38,23 @@ function LogosMarquee() {
     };
 
     updateMarquee();
+    const rafId = requestAnimationFrame(updateMarquee);
     window.addEventListener('resize', updateMarquee);
 
     return () => {
       window.removeEventListener('resize', updateMarquee);
+      cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [i18n.language]);
 
   return (
-    <div className="logos-marquee" aria-label="Approved suppliers" ref={marqueeRef}>
+    <div className="logos-marquee" aria-label={t('common.suppliers.marqueeLabel')} ref={marqueeRef}>
       <div className="logos-marquee__track">
         <div className="logos-marquee__strip" ref={stripRef}>
           {LOGOS.map((logo) => (
             <div key={logo.id} className="logos-marquee__item">
               <img src={logo.src} alt="" className="logos-marquee__icon" aria-hidden="true" />
-              <span className="logos-marquee__label">{logo.label}</span>
+              <span className="logos-marquee__label">{t('common.suppliers.logoLabel')}</span>
             </div>
           ))}
         </div>
@@ -58,7 +62,7 @@ function LogosMarquee() {
           {LOGOS.map((logo) => (
             <div key={`dup-${logo.id}`} className="logos-marquee__item">
               <img src={logo.src} alt="" className="logos-marquee__icon" aria-hidden="true" />
-              <span className="logos-marquee__label">{logo.label}</span>
+              <span className="logos-marquee__label">{t('common.suppliers.logoLabel')}</span>
             </div>
           ))}
         </div>

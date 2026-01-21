@@ -5,6 +5,7 @@
   height: 38px;
   width: 100%;
   overflow: hidden;
+  direction: ltr;
   scrollbar-width: none;
   -ms-overflow-style: none;
   --logo-gap: 64px;
@@ -29,7 +30,7 @@
   align-items: center;
   gap: var(--logo-gap);
   height: 38px;
-  padding-right: var(--logo-gap);
+  padding-inline-end: var(--logo-gap);
   flex-shrink: 0;
 }
 

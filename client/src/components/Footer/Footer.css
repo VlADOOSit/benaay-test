@@ -109,6 +109,16 @@
   cursor: pointer;
 }
 
+[dir='rtl'] .footer__contact-row[href^='tel'] {
+  flex-direction: row;
+}
+
+[dir='rtl'] .footer__contact-row[href^='tel'] span {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+
 .footer__icon {
   width: 20px;
   height: 20px;
@@ -126,6 +136,17 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+}
+
+[dir='rtl'] .footer__bottom > span {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+
+[dir='rtl'] .footer__bottom-links {
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .footer__bottom-links {
