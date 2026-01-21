@@ -74,3 +74,65 @@
   height: 278.67px;
   display: block;
 }
+
+@media (max-width: 767px) {
+  .ready-cta {
+    padding: 24px 16px;
+  }
+
+  .ready-cta__card {
+    max-width: none;
+    height: auto;
+    width: 100%;
+    padding: 24px 16px;
+    border-radius: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 48px;
+  }
+
+  .ready-cta__content {
+    width: 100%;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .ready-cta__text {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .ready-cta__title {
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #030712;
+  }
+
+  .ready-cta__supporting {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #6b7280;
+  }
+
+  .ready-cta__button {
+    width: 100%;
+    padding: 12px 24px;
+    font-weight: 500;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ready-cta__illustration {
+    width: 100%;
+  }
+
+  .ready-cta__illustration img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
