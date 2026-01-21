@@ -5,6 +5,7 @@ import cartIcon from '../../assets/icons/shopping-cart.svg';
 import dropdownIcon from '../../assets/icons/dropdown.svg';
 import searchInputIcon from '../../assets/icons/search-gray.svg';
 import './Header.css';
+import HeaderTabletMenu from './HeaderTabletMenu';
 
 const NAV_LINKS = ['Link 1', 'Link 2', 'Link 3', 'Link 4', 'Link 5'];
 
@@ -13,9 +14,12 @@ const LANGUAGES = ['English', 'Arabic'];
 function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
   const [activeLanguage, setActiveLanguage] = useState('English');
   const searchRef = useRef(null);
   const languageRef = useRef(null);
+  const tabletLanguageRef = useRef(null);
+  const menuRef = useRef(null);
   const searchInputRef = useRef(null);
 
   useEffect(() => {
@@ -34,6 +38,7 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
 
       setIsSearchOpen(false);
       setIsLanguageOpen(false);
+      setIsTabletMenuOpen(false);
     }
 
     function handleClickOutside(event) {
@@ -41,8 +46,16 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
         setIsSearchOpen(false);
       }
 
-      if (languageRef.current && !languageRef.current.contains(event.target)) {
+      const clickedInsideLanguage =
+        languageRef.current?.contains(event.target) ||
+        tabletLanguageRef.current?.contains(event.target);
+
+      if (!clickedInsideLanguage) {
         setIsLanguageOpen(false);
+      }
+
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsTabletMenuOpen(false);
       }
     }
 
@@ -54,6 +67,20 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isTabletMenuOpen) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isTabletMenuOpen]);
 
   return (
     <header className="header">
@@ -83,7 +110,16 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
                 className="header__icon-button"
                 aria-label="Open search"
                 aria-expanded={isSearchOpen}
-                onClick={() => setIsSearchOpen((prev) => !prev)}
+                onClick={() =>
+                  setIsSearchOpen((prev) => {
+                    const next = !prev;
+                    if (next) {
+                      setIsTabletMenuOpen(false);
+                      setIsLanguageOpen(false);
+                    }
+                    return next;
+                  })
+                }
               >
                 <img src={searchIcon} alt="" className="header__icon-image" />
               </button>
@@ -112,7 +148,16 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
                 type="button"
                 className="header__language-button"
                 aria-expanded={isLanguageOpen}
-                onClick={() => setIsLanguageOpen((prev) => !prev)}
+                onClick={() =>
+                  setIsLanguageOpen((prev) => {
+                    const next = !prev;
+                    if (next) {
+                      setIsTabletMenuOpen(false);
+                      setIsSearchOpen(false);
+                    }
+                    return next;
+                  })
+                }
               >
                 <span className="header__language-text">Eng</span>
                 <img src={dropdownIcon} alt="" className="header__chevron-image" />
@@ -138,6 +183,23 @@ function Header({ isAuthenticated, onLoginClick, onLogoutClick }) {
                 </div>
               ) : null}
             </div>
+
+            <HeaderTabletMenu
+              isOpen={isTabletMenuOpen}
+              menuRef={menuRef}
+              tabletLanguageRef={tabletLanguageRef}
+              navLinks={NAV_LINKS}
+              languages={LANGUAGES}
+              activeLanguage={activeLanguage}
+              setActiveLanguage={setActiveLanguage}
+              isLanguageOpen={isLanguageOpen}
+              setIsLanguageOpen={setIsLanguageOpen}
+              setIsSearchOpen={setIsSearchOpen}
+              setIsTabletMenuOpen={setIsTabletMenuOpen}
+              isAuthenticated={isAuthenticated}
+              onLoginClick={onLoginClick}
+              onLogoutClick={onLogoutClick}
+            />
 
             <button
               type="button"
