@@ -78,7 +78,6 @@
 }
 
 .hero__button {
-  width: 200px;
   height: 48px;
   padding: 12px 24px;
   border-radius: 8px;
@@ -99,6 +98,7 @@
 
 .hero__button--primary {
   background-color: #206bb6;
+  width: 200px;
 }
 
 .hero__button--secondary {
@@ -317,11 +317,16 @@
     position: absolute;
     width: 1382px;
     height: 716px;
-    inset-inline-end: -541px;
+    inset-inline-start: -541px;
     top: -55px;
     background: url('../../assets/backgrounds/container-background.jpg') lightgray 50% / cover
       no-repeat;
     z-index: 0;
+  }
+
+  [dir='rtl'] .hero::before {
+    inset-inline-start: auto;
+    inset-inline-end: -541px;
   }
 
   .hero::after {
