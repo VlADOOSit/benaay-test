@@ -461,6 +461,20 @@
   }
 }
 
+@media (max-width: 1078px) {
+  [dir='rtl'] .header__nav {
+    gap: 12px;
+  }
+
+  [dir='rtl'] .header__nav-link {
+    font-size: 14px;
+  }
+
+  [dir='rtl'] .header__actions {
+    gap: 12px;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 924px) {
   .header__inner {
     padding: 12px 20px;
