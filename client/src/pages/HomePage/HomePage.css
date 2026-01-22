@@ -237,7 +237,7 @@
 
 @media (min-width: 768px) and (max-width: 924px) {
   .categories {
-    padding: 20px 80px;
+    padding: 80px;
   }
 
   .categories__heading {
