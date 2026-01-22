@@ -37,7 +37,12 @@ function LoginModal({ onClose, onSwitchToRegister, onSubmit }) {
       await onSubmit?.({ email, password });
       handleClose();
     } catch (err) {
-      setError(err?.message || t('common.modals.login.error'));
+      const errorKey = err?.message;
+      const resolvedError =
+        errorKey && errorKey.startsWith('common.')
+          ? t(errorKey)
+          : t('common.modals.login.error');
+      setError(resolvedError);
     } finally {
       setIsSubmitting(false);
     }

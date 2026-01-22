@@ -48,7 +48,7 @@
   color: #535862;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .feature-card {
     width: 100%;
     height: auto;

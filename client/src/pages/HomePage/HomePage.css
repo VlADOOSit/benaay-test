@@ -260,7 +260,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .suppliers {
     padding: 48px 16px 40px;
     display: flex;
@@ -299,7 +299,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .hero {
     position: relative;
     overflow: hidden;

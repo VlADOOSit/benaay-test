@@ -92,7 +92,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .logos-marquee {
     height: 28px;
     --logo-gap: 40px;

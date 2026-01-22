@@ -1,23 +1,35 @@
 import { apiClient, clearAccessToken, setAccessToken } from './httpClient.js';
 
-const toFriendlyAuthError = (error, fallbackMessage) => {
-  const apiMessage = error?.response?.data?.message;
+const toFriendlyAuthErrorKey = (error, fallbackKey) => {
+  const response = error?.response;
+  const apiMessage = response?.data?.message;
+  const apiError = response?.data?.error;
+  const details = response?.data?.details;
+
+  if (apiError === 'VALIDATION_ERROR' && Array.isArray(details)) {
+    const passwordIssue = details.find(
+      (issue) => issue?.path?.[0] === 'password' && issue?.code === 'too_small'
+    );
+
+    if (passwordIssue) {
+      return 'common.errors.passwordTooShort';
+    }
+  }
 
   if (apiMessage) {
     if (apiMessage === 'Invalid credentials') {
-      return 'Email or password is incorrect.';
+      return 'common.errors.invalidCredentials';
     }
     if (apiMessage === 'Email already in use') {
-      return 'Email is already registered.';
+      return 'common.errors.emailInUse';
     }
-    return apiMessage;
   }
 
   if (error?.message === 'Network Error') {
-    return 'Unable to reach the server. Please try again.';
+    return 'common.errors.network';
   }
 
-  return fallbackMessage;
+  return fallbackKey;
 };
 
 export const login = async ({ email, password }) => {
@@ -30,7 +42,7 @@ export const login = async ({ email, password }) => {
 
     return data;
   } catch (error) {
-    throw new Error(toFriendlyAuthError(error, 'Login failed. Please try again.'));
+    throw new Error(toFriendlyAuthErrorKey(error, 'common.modals.login.error'));
   }
 };
 
@@ -44,7 +56,7 @@ export const register = async ({ fullName, email, password }) => {
 
     return data;
   } catch (error) {
-    throw new Error(toFriendlyAuthError(error, 'Registration failed. Please try again.'));
+    throw new Error(toFriendlyAuthErrorKey(error, 'common.modals.register.error'));
   }
 };
 

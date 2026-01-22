@@ -34,6 +34,12 @@
       "showPassword": "Show password",
       "hidePassword": "Hide password"
     },
+    "errors": {
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailInUse": "Email is already registered.",
+      "network": "Unable to reach the server. Please try again.",
+      "passwordTooShort": "Password is too short. Minimum 8 characters."
+    },
     "hero": {
       "title": "Bannai - Building Materials Market",
       "supporting": "B2B platform specializing in plumbing and building materials. Compare prices and order from certified suppliers.",
