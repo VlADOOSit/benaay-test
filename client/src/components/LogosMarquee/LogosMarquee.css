@@ -34,6 +34,13 @@
   flex-shrink: 0;
 }
 
+.logos-marquee__measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 .logos-marquee:hover .logos-marquee__track {
   animation-play-state: paused;
 }
