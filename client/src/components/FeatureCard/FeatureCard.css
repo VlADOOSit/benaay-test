@@ -15,12 +15,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
 }
 
 .feature-card__icon-image {
   height: 32px;
   width: auto;
+  object-fit: contain;
   display: block;
+  flex: 0 0 auto;
 }
 
 .feature-card__content {

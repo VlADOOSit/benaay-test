@@ -252,6 +252,10 @@
     row-gap: 16px;
   }
 
+  [dir='rtl'] .footer__bottom {
+    flex-direction: row-reverse;
+  }
+
   .footer__bottom-links {
     gap: 16px;
   }
