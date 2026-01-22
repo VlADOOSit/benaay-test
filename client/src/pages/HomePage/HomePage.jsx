@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import Header from '../../components/Header/Header.jsx';
 import CategoryCard from '../../components/CategoryCard/CategoryCard.jsx';
 import FeatureCard from '../../components/FeatureCard/FeatureCard.jsx';
@@ -16,9 +17,11 @@ import laptopIcon from '../../assets/feature-icons/icon-laptop.svg';
 import './HomePage.css';
 
 function HomePage() {
+  const { t, i18n } = useTranslation();
   const [activeModal, setActiveModal] = useState(null);
   const [user, setUser] = useState(null);
   const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
+  const numberFormatter = new Intl.NumberFormat(i18n.language);
 
   useEffect(() => {
     let isMounted = true;
@@ -78,22 +81,21 @@ function HomePage() {
       <section className="hero">
         <div className="hero__content">
           <div className="hero__text-group">
-            <h1 className="hero__title">Bannai - Building Materials Market</h1>
-            <p className="hero__supporting">
-              B2B platform specializing in plumbing and building materials compare prices and order
-              from certified suppliers
-            </p>
+            <h1 className="hero__title">{t('common.hero.title')}</h1>
+            <p className="hero__supporting">{t('common.hero.supporting')}</p>
           </div>
           <div className="hero__cta">
             {user ? (
-              <div className="hero__welcome">Hello, {user.fullName}!</div>
+              <div className="hero__welcome">
+                {t('common.hero.welcome', { name: user.fullName })}
+              </div>
             ) : (
               <button
                 type="button"
                 className="hero__button hero__button--primary"
                 onClick={() => setActiveModal('register')}
               >
-                Start now
+                {t('common.hero.startNow')}
               </button>
             )}
             <button
@@ -101,7 +103,7 @@ function HomePage() {
               className="hero__button hero__button--secondary"
               onClick={() => setActiveModal('register')}
             >
-              Browse the catalog
+              {t('common.hero.browseCatalog')}
             </button>
           </div>
         </div>
@@ -109,11 +111,8 @@ function HomePage() {
       <section className="suppliers">
         <div className="suppliers__inner">
           <div className="suppliers__heading">
-            <h2 className="suppliers__title">Our approved suppliers</h2>
-            <p className="suppliers__supporting">
-              We work only with verified suppliers to ensure quality, reliability, and fair pricing
-              for every order
-            </p>
+            <h2 className="suppliers__title">{t('common.suppliers.title')}</h2>
+            <p className="suppliers__supporting">{t('common.suppliers.supporting')}</p>
           </div>
           <LogosMarquee />
         </div>
@@ -121,27 +120,29 @@ function HomePage() {
       <section className="advantages">
         <div className="advantages__inner">
           <div className="advantages__heading">
-            <h2 className="advantages__title">Our advantages</h2>
-            <p className="advantages__supporting">
-              We combine quality, speed and care so that you get the best result without
-              unnecessary effort.
-            </p>
+            <h2 className="advantages__title">{t('common.advantages.title')}</h2>
+            <p className="advantages__supporting">{t('common.advantages.supporting')}</p>
           </div>
           <div className="advantages__row">
             <FeatureCard
               icon={deliveryIcon}
-              title="Fast delivery"
-              description="Receive your order quickly — guaranteed delivery across all regions of the Kingdom"
+              title={t('common.advantages.cards.delivery.title')}
+              description={
+                <Trans
+                  i18nKey="common.advantages.cards.delivery.description"
+                  components={[<br key="line-break" />]}
+                />
+              }
             />
             <FeatureCard
               icon={priceIcon}
-              title="Compare prices"
-              description="Get instant quotes from trusted suppliers and choose the best offer for your needs"
+              title={t('common.advantages.cards.pricing.title')}
+              description={t('common.advantages.cards.pricing.description')}
             />
             <FeatureCard
               icon={laptopIcon}
-              title="Upload your list"
-              description="Upload a photo or PDF of your materials list — we’ll find matching products for you"
+              title={t('common.advantages.cards.upload.title')}
+              description={t('common.advantages.cards.upload.description')}
             />
           </div>
         </div>
@@ -149,29 +150,26 @@ function HomePage() {
       <section className="categories">
         <div className="categories__inner">
           <div className="categories__heading">
-            <h2 className="categories__title">Main categories</h2>
-            <p className="categories__supporting">
-              Quickly find the materials you need. Choose a category and explore ready offers from
-              trusted suppliers
-            </p>
+            <h2 className="categories__title">{t('common.categories.title')}</h2>
+            <p className="categories__supporting">{t('common.categories.supporting')}</p>
           </div>
           <div className="categories__row">
             <CategoryCard
-              badgeText="1"
-              title="Plumbing connections"
-              description="Durable connectors for reliable water flow in any plumbing system"
+              badgeText={numberFormatter.format(1)}
+              title={t('common.categories.cards.plumbing.title')}
+              description={t('common.categories.cards.plumbing.description')}
               theme="blue"
             />
             <CategoryCard
-              badgeText="2"
-              title="UPVC fittings"
-              description="Lightweight, corrosion-resistant fittings for modern piping solutions"
+              badgeText={numberFormatter.format(2)}
+              title={t('common.categories.cards.upvc.title')}
+              description={t('common.categories.cards.upvc.description')}
               theme="green"
             />
             <CategoryCard
-              badgeText="3"
-              title="PPR fittings"
-              description="High-pressure, heat-resistant fittings built for long-term performance"
+              badgeText={numberFormatter.format(3)}
+              title={t('common.categories.cards.ppr.title')}
+              description={t('common.categories.cards.ppr.description')}
               theme="purple"
             />
           </div>

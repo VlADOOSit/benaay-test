@@ -5,6 +5,7 @@
   height: 38px;
   width: 100%;
   overflow: hidden;
+  direction: ltr;
   scrollbar-width: none;
   -ms-overflow-style: none;
   --logo-gap: 64px;
@@ -29,8 +30,15 @@
   align-items: center;
   gap: var(--logo-gap);
   height: 38px;
-  padding-right: var(--logo-gap);
+  padding-inline-end: var(--logo-gap);
   flex-shrink: 0;
+}
+
+.logos-marquee__measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 .logos-marquee:hover .logos-marquee__track {
@@ -84,7 +92,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .logos-marquee {
     height: 28px;
     --logo-gap: 40px;

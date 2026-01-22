@@ -1,7 +1,9 @@
 import arrowIcon from '../../assets/icons/arrow.svg';
 import './CategoryCard.css';
+import { useTranslation } from 'react-i18next';
 
 function CategoryCard({ badgeText, title, description, theme }) {
+  const { t } = useTranslation();
   const themeClass = theme ? `category-card--${theme}` : '';
 
   return (
@@ -13,7 +15,7 @@ function CategoryCard({ badgeText, title, description, theme }) {
       <div className="category-card__footer">
         <p className="category-card__text">{description}</p>
         <button type="button" className="category-card__button">
-          <span>Browse products</span>
+          <span>{t('common.categories.browseProducts')}</span>
           <img src={arrowIcon} alt="" aria-hidden="true" className="category-card__button-icon" />
         </button>
       </div>

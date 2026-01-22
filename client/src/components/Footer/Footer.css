@@ -109,6 +109,16 @@
   cursor: pointer;
 }
 
+[dir='rtl'] .footer__contact-row[href^='tel'] {
+  flex-direction: row;
+}
+
+[dir='rtl'] .footer__contact-row[href^='tel'] span {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+
 .footer__icon {
   width: 20px;
   height: 20px;
@@ -128,6 +138,17 @@
   font-weight: 400;
 }
 
+[dir='rtl'] .footer__bottom > span {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: left;
+}
+
+[dir='rtl'] .footer__bottom-links {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 .footer__bottom-links {
   display: flex;
   gap: 16px;
@@ -139,7 +160,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .footer {
     padding: 24px 16px;
     border-top: 1px solid #e5e7eb;
@@ -229,6 +250,10 @@
     border-top: 1px solid #e5e7eb;
     flex-wrap: wrap;
     row-gap: 16px;
+  }
+
+  [dir='rtl'] .footer__bottom {
+    flex-direction: row-reverse;
   }
 
   .footer__bottom-links {

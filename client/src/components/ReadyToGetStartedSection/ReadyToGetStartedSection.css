@@ -75,7 +75,7 @@
   display: block;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .ready-cta {
     padding: 24px 16px;
   }

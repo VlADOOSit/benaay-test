@@ -1,0 +1,157 @@
+{
+  "common": {
+    "brand": {
+      "name": "Benaay"
+    },
+    "language": {
+      "short": "Eng",
+      "english": "English",
+      "arabic": "Arabic"
+    },
+    "nav": {
+      "link1": "Link 1",
+      "link2": "Link 2",
+      "link3": "Link 3",
+      "link4": "Link 4",
+      "link5": "Link 5"
+    },
+    "header": {
+      "primaryNav": "Primary",
+      "openSearch": "Open search",
+      "searchPlaceholder": "Search...",
+      "cart": "Cart",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "menu": "Menu",
+      "tabletNav": "Tablet navigation"
+    },
+    "auth": {
+      "login": "Log In",
+      "logout": "Log Out"
+    },
+    "actions": {
+      "close": "Close",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
+    "errors": {
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailInUse": "Email is already registered.",
+      "network": "Unable to reach the server. Please try again.",
+      "passwordTooShort": "Password is too short. Minimum 8 characters."
+    },
+    "hero": {
+      "title": "Bannai - Building Materials Market",
+      "supporting": "B2B platform specializing in plumbing and building materials. Compare prices and order from certified suppliers.",
+      "welcome": "Hello, {{name}}!",
+      "startNow": "Start now",
+      "browseCatalog": "Browse the catalog"
+    },
+    "suppliers": {
+      "title": "Our approved suppliers",
+      "supporting": "We work only with verified suppliers to ensure quality, reliability, and fair pricing for every order.",
+      "marqueeLabel": "Approved suppliers",
+      "logoLabel": "Logo"
+    },
+    "advantages": {
+      "title": "Our advantages",
+      "supporting": "We combine quality, speed, and care so that you get the best result without unnecessary effort.",
+      "cards": {
+        "delivery": {
+          "title": "Fast delivery",
+          "description": "Receive your order quickly - guaranteed delivery across all regions of the Kingdom."
+        },
+        "pricing": {
+          "title": "Compare prices",
+          "description": "Get instant quotes from trusted suppliers and choose the best offer for your needs."
+        },
+        "upload": {
+          "title": "Upload your list",
+          "description": "Upload a photo or PDF of your materials list - we will find matching products for you."
+        }
+      }
+    },
+    "categories": {
+      "title": "Main categories",
+      "supporting": "Quickly find the materials you need. Choose a category and explore ready offers from trusted suppliers.",
+      "browseProducts": "Browse products",
+      "cards": {
+        "plumbing": {
+          "title": "Plumbing connections",
+          "description": "Durable connectors for reliable water flow in any plumbing system."
+        },
+        "upvc": {
+          "title": "UPVC fittings",
+          "description": "Lightweight, corrosion-resistant fittings for modern piping solutions."
+        },
+        "ppr": {
+          "title": "PPR fittings",
+          "description": "High-pressure, heat-resistant fittings built for long-term performance."
+        }
+      }
+    },
+    "ready": {
+      "title": "Ready to get started?",
+      "supporting": "Join hundreds of contractors and plumbers who use Bannai to save time and money.",
+      "button": "Register now for free"
+    },
+    "footer": {
+      "brandText": "Join hundreds of contractors and plumbers who use Bannai to save time and money.",
+      "links": {
+        "insulation": "Insulation materials",
+        "exteriorPaints": "Exterior paints",
+        "healthProducts": "Health products",
+        "pipesValves": "Pipes and valves",
+        "electricalSupplies": "Electrical supplies",
+        "powerTools": "Power tools",
+        "safetyEquipment": "Safety equipment",
+        "handTools": "Hand tools"
+      },
+      "email": "hi@untitledui.com",
+      "addressLines": [
+        "100 Smith Street Collingwood",
+        "VIC 3066 AU"
+      ],
+      "phone": "+1 (555) 000-0000",
+      "copyright": "(c) 2025 Logo. All rights reserved.",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "cookies": "Cookies"
+    },
+    "modals": {
+      "login": {
+        "ariaLabel": "Login",
+        "title": "Enter the office",
+        "subtitle": "Please enter your details to continue.",
+        "emailPlaceholder": "Login or e-mail",
+        "passwordPlaceholder": "Enter your password",
+        "forgot": "Forgot your password?",
+        "submit": "Sign in",
+        "submitting": "Signing in...",
+        "noAccount": "Don't have an account yet?",
+        "register": "Register",
+        "error": "Login failed. Please try again."
+      },
+      "register": {
+        "ariaLabel": "Registration",
+        "title": "Registration",
+        "subtitle": "Fill in the form below to create a new account.",
+        "fullNamePlaceholder": "Full Name",
+        "emailPlaceholder": "E-mail",
+        "passwordPlaceholder": "Enter your password",
+        "submit": "Sign Up",
+        "submitting": "Signing up...",
+        "alreadyRegistered": "Already registered?",
+        "login": "Login",
+        "error": "Registration failed. Please try again."
+      },
+      "logout": {
+        "ariaLabel": "Confirm logout",
+        "title": "Log out?",
+        "subtitle": "Are you sure you want to log out of your account?",
+        "cancel": "Cancel",
+        "confirm": "Log out"
+      }
+    }
+  }
+}

@@ -16,6 +16,7 @@
 
 .hero__content {
   padding: 12px 0;
+  padding-right: 32px;
   width: 100%;
   max-width: 1280px;
   display: flex;
@@ -26,7 +27,7 @@
 }
 
 .hero__text-group {
-  width: 660px;
+  max-width: 660px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -77,7 +78,6 @@
 }
 
 .hero__button {
-  width: 200px;
   height: 48px;
   padding: 12px 24px;
   border-radius: 8px;
@@ -98,6 +98,7 @@
 
 .hero__button--primary {
   background-color: #206bb6;
+  width: 200px;
 }
 
 .hero__button--secondary {
@@ -259,7 +260,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .suppliers {
     padding: 48px 16px 40px;
     display: flex;
@@ -298,7 +299,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .hero {
     position: relative;
     overflow: hidden;
@@ -307,16 +308,25 @@
     background: none;
   }
 
+  [dir='rtl'] .hero {
+    padding: 315px 16px 32px;
+  }
+
   .hero::before {
     content: '';
     position: absolute;
     width: 1382px;
     height: 716px;
-    left: -541px;
+    inset-inline-start: -541px;
     top: -55px;
     background: url('../../assets/backgrounds/container-background.jpg') lightgray 50% / cover
       no-repeat;
     z-index: 0;
+  }
+
+  [dir='rtl'] .hero::before {
+    inset-inline-start: auto;
+    inset-inline-end: -541px;
   }
 
   .hero::after {
